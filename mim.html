@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Taarifa za Kikao</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body {
+body {
+    overflow: auto
+ height: 100vh;
+    margin: 0;
+    height: 100vh;
+    background-color: #000014;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Arial Black', Arial, sans-serif;
+  }
+  .container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    color: #ff66ff;
+    text-align: center;
+  }
+  /* Neon circle */
+  .neon-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 320px;
+    height: 320px;
+    margin-top: -160px;
+    margin-left: -160px;
+    border-radius: 50%;
+    box-shadow:
+      0 0 15px #ff66ff,
+      0 0 30px #ff33cc,
+      0 0 40px #ff00cc,
+      0 0 50px #ff00ff,
+      0 0 70px #ff00ff;
+    animation: glow 2.5s ease-in-out infinite alternate;
+    z-index: 1;
+  }
+  @keyframes glow {
+    0% {
+      box-shadow:
+        0 0 10px #ff66ff,
+        0 0 20px #ff33cc,
+        0 0 30px #ff00cc,
+        0 0 40px #ff00ff,
+        0 0 50px #ff00ff;
+    }
+    100% {
+      box-shadow:
+        0 0 20px #ff99ff,
+        0 0 40px #ff66ff,
+        0 0 50px #ff33cc,
+        0 0 60px #ff00cc,
+        0 0 80px #ff00ff;
+    }
+  }
+  /* Text around circle */
+  .circle-text {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    top: 50%;
+    left: 50%;
+    margin-top: -160px;
+    margin-left: -160px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 30px;
+    color: #33adff;
+    z-index: 2;
+  }
+  .circle-text span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-origin: 0 140px; /* Distance from center */
+  }
+
+  /* Position letters in a circle */
+  /* 7 letters W E L C O M E, so 7 spans spaced at ~51.43deg each */
+  .circle-text span:nth-child(1) { transform: rotate(0deg) translateX(-50%) translateY(-140px); }
+  .circle-text span:nth-child(2) { transform: rotate(51.43deg) translateX(-50%) translateY(-140px); }
+  .circle-text span:nth-child(3) { transform: rotate(102.86deg) translateX(-50%) translateY(-140px); }
+  .circle-text span:nth-child(4) { transform: rotate(154.29deg) translateX(-50%) translateY(-140px); }
+  .circle-text span:nth-child(5) { transform: rotate(205.72deg) translateX(-50%) translateY(-140px); }
+  .circle-text span:nth-child(6) { transform: rotate(257.15deg) translateX(-50%) translateY(-140px); }
+  .circle-text span:nth-child(7) { transform: rotate(308.58deg) translateX(-50%) translateY(-140px); }
+
+  /* Center text */
+  .center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Courier New', Courier, monospace;
+    color: #ff66ff;
+    font-size: 28px;
+    line-height: 1.4;
+    font-weight: 900;
+    text-shadow:
+      0 0 5px #ff66ff,
+      0 0 10px #ff33cc,
+      0 0 15px #ff00cc;
+    z-index: 3;
+  }
+
+  /* Butterflies */
+  .butterfly {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: url('https://i.postimg.cc/8c9xP4Xx/butterfly.png') no-repeat center/contain;
+    filter: drop-shadow(0 0 8px #ff99ff);
+    animation: flutter 3s ease-in-out infinite;
+    z-index: 4;
+  }
+  .butterfly.small {
+    width: 40px;
+    height: 40px;
+    animation-duration: 4s;
+  }
+  .butterfly1 {
+    top: 30%;
+    left: 20%;
+    animation-delay: 0s;
+  }
+  .butterfly2 {
+    top: 50%;
+    left: 60%;
+    animation-delay: 1.5s;
+  }
+
+  @keyframes flutter {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(10deg); }
+  }
+
+  /* Flower petals (simple circles with glow) */
+  .flower {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle at center, #ff66ff, #cc33cc);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    filter: drop-shadow(0 0 8px #ff33cc);
+    animation: pulse 2.5s ease-in-out infinite alternate;
+    z-index: 2;
+  }
+  .flower1 {
+    bottom: 20%;
+    left: 35%;
+  }
+  .flower2 {
+    bottom: 15%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+  }
+
+  @keyframes pulse {
+    0% { filter: drop-shadow(0 08px #ff33cc); }
+    100% { filter: drop-shadow(0 0 15px #ff99ff); }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="neon-circle"></div>
+
+    <div class="circle-text">
+      <span>W</span>
+      <span>E</span>
+      <span>L</span>
+      <span>C</span>
+      <span>O</span>
+      <span>M</span>
+      <span>E</span>
+    </div>
+
+    <div class="top-text">
+      TO<br>THE<br>GROUP
+    </div>
+
+    <div class="butterfly butterfly1"></div>
+    <div class="butterfly butterfly2 small"></div>
+
+    <div class="flower flower1"></div>
+    <div class="flower flower2"></div>
+  </div>
+</body>
+</html>
+<br>
+<br>
+<!DOCTYPE html>
+    <link rel="stylesheet" href="style.css">
+<form action="save_meeting.php" method="post">
+    Jina la Kikao:<br>
+    <input type="text" name="title" required><br><br>
+
+    Tarehe:<br>
+    <input type="date" name="date" required><br><br>
+
+    Muda:<br>
+    <input type="time" name="time" required><br><br>
+
+    Mahali / Link:<br>
+    <input type="text" name="venue"><br><br>
+
+    Ajenda:<br>
+    <textarea name="agenda"></textarea><br><br>    
+</head>
+<body>
+<html>
+<head>
+</head>
+</body>
+</html>
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jedwali la Washiriki</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            margin: 40px auto;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        caption {
+            caption-side: top;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>List of Participants</title>
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 300px 0;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h2>Participants List</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+        </tr>
+        <tr>
+            <td><input type="text" placeholder="Enter name"></td>
+            <td><input type="text" placeholder="Enter position"></td>
+        </tr>
+        <tr>
+            
+<td><input type="text" placeholder="Enter name"></td>
+            <td><input type="text" placeholder="Enter position"></td>
+</tr>
+        <tr>
+<td><input type="text" placeholder="Enter name"></td>
+            <td><input type="text" placeholder="Enter position"></td>
+</tr>
+        <tr>
+<td><input type="text" placeholder="Enter name"></td>
+            <td><input type="text" placeholder="Enter position"></td>
+</tr>
+        <tr>
+<td><input type="text" placeholder="Enter name"></td>
+            <td><input type="text" placeholder="Enter position"></td>
+</tr>
+        <tr>
+<td><input type="text" placeholder="Enter name"></td>
+            <td><input type="text" placeholder="Enter position"></td>
+</tr>
+        <tr>
+<td><input type="text" placeholder="Enter name"></td>
+            <td><input type="text" placeholder="Enter position"></td>
+</tr>
+        <tr>
+<td><input type="text" placeholder="Enter name"></td>
+            <td><input type="text" placeholder="Enter position"></td>
+</tr>
+        <tr>
+<td><input type="text" placeholder="Enter name"></td>
+            <td><input type="text" placeholder="Enter position"></td>
+</tr>
+        <tr>
+<td><input type="text" placeholder="Enter name"></td>
+            <td><input type="text" placeholder="Enter position"></td>
+</tr>
+        <tr>
+<td><input type="text" placeholder="Enter name"></td>
+            <td><input type="text" placeholder="Enter position"></td>
+</tr>
+        <tr>
+<td><input type="text" placeholder="Enter name"></td>
+            <td><input type="text" placeholder="Enter position"></td>
+</tr>
+        <tr>
+<td><input type="text" placeholder="Enter name"></td>
+            <td><input type="text" placeholder="Enter position"></td>
+</tr>
+        <tr>
+<td><input type="text" placeholder="Enter name"></td>
+            <td><input type="text" placeholder="Enter position"></td>
+        </tr>
+        <!-- Add more rows as needed -->
+</HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Links</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .participant {
+            margin-bottom: 15px;
+        }
+        .participant button {
+            margin-right: 10px;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+        .attended { background-color: #4CAF50; color: white; }
+        .absent { background-color: #f44336; color: white; }
+        .apology { background-color: #ff9800; color: white; }
+    </style>
+</head>
+</body>
+</HTML>
+
+
+       
+                 <!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #333;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        .status-select {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        .result-container {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Attendance Registration</h1>
+
+    <!-- Form for entering new attendance -->
+    <div class="form-container">
+        <h2>Enter Attendance Information</h2>
+        <form id="attendanceForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="">Select Status</option>
+                <option value="Attendant">Attendant</option>
+                <option value="Absentee">Absentee</option>
+                <option value="Apology">Apology</option>
+            </select><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Container to show the results -->
+    <div class="result-container" id="resultContainer">
+        <h2>Attendance Results</h2>
+        
+        <div class="section-title">Attendees</div>
+        <table id="attendeesTable">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Attendees data will be inserted here -->
+            </tbody>
+        </table>
+
+        <div class="section-title">Absentees</div>
+        <table id="absenteesTable">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Absentees data will be inserted here -->
+            </tbody>
+        </table>
+
+        <div class="section-title">Apologies</div>
+        <table id="apologiesTable">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Apologies data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Initialize variables for keeping track of table entries
+        let attendeesCounter = 1;
+        let absenteesCounter = 1;
+        let apologiesCounter = 1;
+
+        // Get references to the form and result containers
+        const form = document.getElementById('attendanceForm');
+        const nameInput = document.getElementById('name');
+        const statusSelect = document.getElementById('status');
+        const attendeesTable = document.getElementById('attendeesTable').getElementsByTagName('tbody')[0];
+        const absenteesTable = document.getElementById('absenteesTable').getElementsByTagName('tbody')[0];
+        const apologiesTable = document.getElementById('apologiesTable').getElementsByTagName('tbody')[0];
+
+        // Event listener for form submission
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form from refreshing page
+
+            // Get form values
+            const name = nameInput.value.trim();
+            const status = statusSelect.value;
+
+            // Validate input
+            if (name === '' || status === '') {
+                alert('Please enter both name and status!');
+                return;
+            }
+
+            // Create a new row for each section based on status
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${status === 'Attendant' ? attendeesCounter : status === 'Absentee' ? absenteesCounter : apologiesCounter}</td>
+                <td>${name}</td>
+                <td>${status}</td>
+            `;
+
+            // Append the row to the appropriate table based on status
+            if (status === 'Attendant') {
+                attendeesTable.appendChild(row);
+                attendeesCounter++;
+            } else if (status === 'Absentee') {
+                absenteesTable.appendChild(row);
+                absenteesCounter++;
+            } else if (status === 'Apology') {
+                apologiesTable.appendChild(row);
+                apologiesCounter++;
+            }
+
+            // Clear the form fields for next entry
+            nameInput.value = '';
+            statusSelect.value = '';
+        });
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yaliyojadiliwa Kwenye Kikao</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #333;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        .text-area {
+            width: 100%;
+            height: 100px;
+            padding: 5px;
+        }
+
+        .submit-btn {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Meza ya Yaliyojadiliwa Kwenye Kikao</h1>
+
+    <!-- Form for entering discussion points -->
+    <div class="form-container">
+        <h2>Jaza Yaliyojadiliwa</h2>
+        <form id="discussionForm">
+            <label for="discussion">Hoja/Zilizojadiliwa:</label><br>
+            <textarea id="discussion" class="text-area" placeholder="Andika Hoja/Zilizojadiliwa hapa" required></textarea><br><br>
+            <button type="submit" class="submit-btn">Tuma</button>
+        </form>
+    </div>
+
+    <!-- Container to show the results -->
+    <div class="result-container">
+        <h2>Yaliyojadiliwa</h2>
+        <table id="discussionTable">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Hoja/Zilizojadiliwa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Discussion points data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Initialize counter for discussion points
+        let discussionCounter = 1;
+
+        // Get references to the form and result container
+        const form = document.getElementById('discussionForm');
+        const discussionTextArea = document.getElementById('discussion');
+        const discussionTableBody = document.getElementById('discussionTable').getElementsByTagName('tbody')[0];
+
+        // Event listener for form submission
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent form from refreshing page
+
+            // Get the discussion point entered by the user
+            const discussionPoint = discussionTextArea.value.trim();
+
+            // Validate input
+            if (discussionPoint === '') {
+                alert('Tafadhali jaza hoja au mada zilizojadiliwa!');
+                return;
+            }
+
+            // Create a new row for the discussion point
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${discussionCounter}</td>
+                <td>${discussionPoint}</td>
+            `;
+
+            // Append the row to the table
+            discussionTableBody.appendChild(row);
+
+            // Increment the counter for the next discussion point
+            discussionCounter++;
+
+            // Clear the form field for next entry
+            discussionTextArea.value = '';
+        });
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blank Table for Challenges</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        caption {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .input-cell {
+            width: 100%;
+            height: 50px;
+            padding: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .submit-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <table>
+        <caption>Challenges Discussed in the Meeting</caption>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Challenge</th>
+                <th>Assigned To</th>
+                <th>Deadline</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <tr>
+                <td>1</td>
+                <td><input class="input-cell" type="text" placeholder="Enter challenge"></td>
+                <td><input class="input-cell" type="text" placeholder="Assigned to"></td>
+                <td><input class="input-cell" type="date"></td>
+                <td><input class="input-cell" type="text" placeholder="Status"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><input class="input-cell" type="text" placeholder="Enter challenge"></td>
+                <td><input class="input-cell" type="text" placeholder="Assigned to"></td>
+                <td><input class="input-cell" type="date"></td>
+                <td><input class="input-cell" type="text" placeholder="Status"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><input class="input-cell" type="text" placeholder="Enter challenge"></td>
+                <td><input class="input-cell" type="text" placeholder="Assigned to"></td>
+                <td><input class="input-cell" type="date"></td>
+                <td><input class="input-cell" type="text" placeholder="Status"></td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+
+    <div class="button-container">
+        <button class="submit-button" onclick="submitTable()">Submit Challenges</button>
+    </div>
+
+    <script>
+        function submitTable() {
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const challenge = row.querySelector('td:nth-child(2) input').value;
+                const assignedTo = row.querySelector('td:nth-child(3) input').value;
+                const deadline = row.querySelector('td:nth-child(4) input').value;
+                const status = row.querySelector('td:nth-child(5) input').value;
+
+                // For now, log the table data to the console
+                console.log(`Challenge: ${challenge}, Assigned To: ${assignedTo}, Deadline: ${deadline}, Status: ${status}`);
+            });
+            alert('Challenges submitted! Check the console for the details.');
+        }
+    </script>
+
+</body>
+</html>
+<button onclick="downloadReport()">Download Report</button>
+
+<script>
+function downloadReport() {
+  let name = document.getElementById("name").value;
+  let report = document.getElementById("report").value;
+
+  let content = "Name: " + name + "\n\nReport:\n" + report;
+
+  let blob = new Blob([content], { type: "text/plain" });
+  let link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "session_report.txt";
+  link.click();
+</script>
+}
+
+
+
+    
